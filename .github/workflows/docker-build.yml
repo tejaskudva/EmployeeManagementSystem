@@ -20,6 +20,7 @@ jobs:
 
     - name: Build with Maven
       run: mvn clean package -DskipTests
+      working-directory: ./EmployeeManagementSystem  # <-- Specify the directory where pom.xml is located
 
     - name: Log in to DockerHub
       uses: docker/login-action@v3
