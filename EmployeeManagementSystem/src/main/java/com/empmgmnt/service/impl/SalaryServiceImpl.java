@@ -26,7 +26,7 @@ public class SalaryServiceImpl implements SalaryService {
 	public ResponseEntity<Object> addSalaryRecord(Salary sal, Long employeeId) {
 		try {
 
-			Employee emp = empRepo.findById(employeeId).orElseThrow();
+			Employee emp = empRepo.findById(employeeId).orElseThrow(() -> new RuntimeException("Entity not found"));
 			sal.setEmployee(emp);
 
 			return new ResponseEntity<>(salRepo.save(sal), HttpStatus.OK);

@@ -27,7 +27,7 @@ public class AttendanceMgmtServiceImpl implements AttendanceMgmtService {
 
 		try {
 
-			Employee emp = empRepo.findById(employeeId).orElseThrow();
+			Employee emp = empRepo.findById(employeeId).orElseThrow(() -> new RuntimeException("Entity not found"));
 			attendance.setEmployee(emp);
 
 			return new ResponseEntity<>(attRepo.save(attendance), HttpStatus.OK);
