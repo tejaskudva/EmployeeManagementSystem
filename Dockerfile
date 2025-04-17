@@ -1,8 +1,12 @@
-# Use a Java 8 base image
+# Stage 1: Build the project
+FROM maven:3.8.5-openjdk-8 AS build
+WORKDIR /EmployeeManagementSystem
+COPY pom.xml .
+COPY src ./src
+RUN mvn clean package -DskipTests
+
+# Stage 2: Run the built JAR
 FROM openjdk:8-jdk-alpine
-
-# Copy the jar file into the container
-COPY EmployeeManagementSystem/target/*.jar EmployeeManagementSystem-0.0.1.jar
-
-# Run the jar
-ENTRYPOINT ["java", "-jar", "/EmployeeManagementSystem-0.0.1.jar"]
+WORKDIR /EmployeeManagementSystem
+COPY --from=build /EmployeeManagementSystem/target/*.jar app.jar
+ENTRYPOINT ["java", "-jar", "app.jar"]
