@@ -1,6 +1,7 @@
 package com.empmgmnt.controller;
 
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -30,6 +31,11 @@ public class AttendanceMgmtController {
 	@GetMapping("/get/{employeeId}")
 	public ResponseEntity<Object> getByEmployeeId(@PathVariable Long employeeId) {
 		return attendanceMgmtService.getByEmployeeId(employeeId);
+	}
+
+	@DeleteMapping("/delete/{attendanceId}")
+	public ResponseEntity<Object> deleteByAttendanceId(@PathVariable Long attendanceId) {
+		return attendanceMgmtService.deleteByAttendanceId(attendanceId);
 	}
 
 }

@@ -53,4 +53,18 @@ public class AttendanceMgmtServiceImpl implements AttendanceMgmtService {
 		}
 	}
 
+	@Override
+	public ResponseEntity<Object> deleteByAttendanceId(Long attendanceId) {
+		try {
+
+			attRepo.deleteById(attendanceId);
+			return new ResponseEntity<>("Deleted", HttpStatus.OK);
+
+		} catch (Exception e) {
+			return new ResponseEntity<>(
+					GenericErrorResponse.builder().errorCode(1).errorDescription(e.toString()).build(),
+					HttpStatus.INTERNAL_SERVER_ERROR);
+		}
+	}
+
 }

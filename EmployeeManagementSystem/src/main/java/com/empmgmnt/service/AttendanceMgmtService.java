@@ -10,4 +10,6 @@ public interface AttendanceMgmtService {
 
 	ResponseEntity<Object> getByEmployeeId(Long employeeId);
 
+	ResponseEntity<Object> deleteByAttendanceId(Long attendanceId);
+
 }
